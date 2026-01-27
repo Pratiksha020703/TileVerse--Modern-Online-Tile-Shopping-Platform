@@ -24,16 +24,24 @@ namespace AuthService.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (await _context.Users.AnyAsync(u => u.Email == request.Email))
                 return BadRequest("Email already exists");
+
+            string role = "CUSTOMER";
+
+            if (request.Email.ToLower() == "admin@gmail.com")
+            {
+                role = "ADMIN";
+            }
 
             var user = new User
             {
                 FullName = request.FullName,
                 Email = request.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
+                Role = role
             };
 
             _context.Users.Add(user);
@@ -43,9 +51,10 @@ namespace AuthService.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == request.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
                 return Unauthorized("Invalid credentials");
@@ -57,13 +66,13 @@ namespace AuthService.Controllers
                 user.Role
             );
 
-
             return Ok(new { token });
         }
 
+
         // FORGOT PASSWORD
         [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
@@ -81,7 +90,7 @@ namespace AuthService.Controllers
 
         // RESET PASSWORD
         [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u =>
                 u.ResetToken == request.Token &&

@@ -1,37 +1,32 @@
 package Tileproject.controller;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 import Tileproject.model.Product;
 import Tileproject.service.ProductService;
 
-import java.util.List;
+@RestController
+@RequestMapping("/api/products")
+@CrossOrigin(origins = "http://localhost:3000")
+public class ProductController {
 
-	@RestController
-	@RequestMapping("/api/products")
-	public class ProductController {
+    private final ProductService productService;
 
-	    private final ProductService productService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
-	    public ProductController(ProductService productService) {
-	        this.productService = productService;
-	    }
+    // ✅ GET ALL PRODUCTS
+    @GetMapping
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
+    }
 
-	    // Add product with stock
-	    @PostMapping("/{stock}")
-	    public Product addProduct(@RequestBody Product product,
-	                              @PathVariable Integer stock) {
-	        return productService.addProduct(product, stock);
-	    }
-
-	    @GetMapping
-	    public List<Product> getAllProducts() {
-	        return productService.getAllProducts();
-	    }
-
-	    @GetMapping("/category/{categoryId}")
-	    public List<Product> getByCategory(@PathVariable Integer categoryId) {
-	        return productService.getProductsByCategory(categoryId);
-	    }
-	}
-
-
+    // ✅ CREATE PRODUCT (THIS WAS MISSING)
+    @PostMapping
+    public Product createProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
+    }
+}

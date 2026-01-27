@@ -1,3 +1,4 @@
+
 package Tileproject.model;
 
 import jakarta.persistence.*;
@@ -11,14 +12,18 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
-    
+
     @ManyToOne
-    @JoinColumn(name = "user_id")   // FK column
+    @JoinColumn(name = "user_id")
     private User user;
+
+    // @Column(nullable = false)
+    // private String userEmail;   // ✅ ADD THIS
 
     private LocalDateTime orderDate;
     private String orderStatus;
     private BigDecimal totalAmount;
+
 
     // ===== GETTERS & SETTERS =====
 
@@ -54,6 +59,5 @@ public class Order {
         this.totalAmount = totalAmount;
     }
 }
-
 
 

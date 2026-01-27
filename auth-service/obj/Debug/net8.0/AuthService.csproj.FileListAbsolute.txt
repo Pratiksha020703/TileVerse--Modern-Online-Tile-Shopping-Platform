@@ -114,3 +114,4 @@ D:\Tileverse_Website\auth-service\obj\Debug\net8.0\refint\AuthService.dll
 D:\Tileverse_Website\auth-service\obj\Debug\net8.0\AuthService.pdb
 D:\Tileverse_Website\auth-service\obj\Debug\net8.0\AuthService.genruntimeconfig.cache
 D:\Tileverse_Website\auth-service\obj\Debug\net8.0\ref\AuthService.dll
+D:\Tileverse_Website\auth-service\obj\Debug\net8.0\AuthService.sourcelink.json

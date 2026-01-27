@@ -1,7 +1,5 @@
 package Tileproject.service;
-
-	import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Service;
 import Tileproject.model.Category;
 import Tileproject.repository.CategoryRepository;
 

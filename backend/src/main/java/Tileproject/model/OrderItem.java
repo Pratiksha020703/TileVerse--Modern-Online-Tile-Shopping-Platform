@@ -1,3 +1,4 @@
+
 package Tileproject.model;
 
 import jakarta.persistence.*;
@@ -63,4 +64,3 @@ public class OrderItem {
         this.price = price;
     }
 }
-

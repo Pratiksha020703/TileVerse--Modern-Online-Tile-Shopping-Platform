@@ -17,7 +17,7 @@ namespace AuthService.Models
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
 
-        public string Role { get; set; } = "CUSTOMER";
+        public string? Role { get; set; } = string.Empty;
 
         // For Forgot Password
         public string? ResetToken { get; set; }

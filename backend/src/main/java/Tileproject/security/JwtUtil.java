@@ -19,4 +19,9 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+    // ✅ ADD THIS
+    public String extractUsername(String token) {
+        return validateToken(token).getSubject();
+    }
 }
