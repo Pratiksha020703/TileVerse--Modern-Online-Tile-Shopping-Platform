@@ -62,6 +62,12 @@ public List<ProductStockDTO> getAllProducts() {
     return productRepository.findActiveProductsWithStock();
 }
 
+@GetMapping("/category/{categoryId}")
+public List<ProductStockDTO> getProductsByCategory(@PathVariable Integer categoryId) {
+    return productRepository.findProductsByCategory(categoryId);
+}
+
+
 
 // @GetMapping
 // public List<ProductStockDTO> getAllProducts() {
@@ -86,11 +92,34 @@ public List<ProductStockDTO> getAllProducts() {
 
 
     // 🔓 PUBLIC – GET ONE PRODUCT
+        // @GetMapping("/{id}")
+        // public Product getProductById(@PathVariable Integer id) {
+        //      return productRepository.findById(id)
+        //      .orElseThrow(() -> new RuntimeException("Product not found"));
+        // }
+
         @GetMapping("/{id}")
-        public Product getProductById(@PathVariable Integer id) {
-             return productRepository.findById(id)
-             .orElseThrow(() -> new RuntimeException("Product not found"));
-        }
+public ProductStockDTO getProductById(@PathVariable Integer id) {
+
+    Product product = productRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Product not found"));
+
+    Inventory inventory = inventoryRepository
+            .findByProduct_ProductId(id)
+            .orElseThrow(() -> new RuntimeException("Inventory not found"));
+
+    return new ProductStockDTO(
+            product.getProductId(),
+            product.getProductName(),
+            product.getImageUrl(),
+            product.getPricePerBox(),
+            product.getSize(),
+            product.getMaterial(),
+            product.getCategory().getCategoryName(),
+            inventory.getStockQuantity()
+    );
+}
+
 
 
     // 🔐 ADMIN – ADD PRODUCT

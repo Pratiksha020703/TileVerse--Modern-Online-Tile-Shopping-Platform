@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axiosConfig";
+import { updateCartQuantity } from "../api/ecommerceApi";
+
 
 import "../styles/Checkout.css";
 
@@ -48,8 +50,11 @@ const Checkout = () => {
   };
 
   const updateQty = async (itemId, qty) => {
+    if (qty < 1) return;
   try {
-    await api.put(`/api/cart/update/${itemId}/${qty}`);
+    //await api.put(`/api/cart/update/${itemId}/${qty}`);
+    await updateCartQuantity(itemId, qty);
+
     loadCart();
   } catch {
     alert("Failed to update");

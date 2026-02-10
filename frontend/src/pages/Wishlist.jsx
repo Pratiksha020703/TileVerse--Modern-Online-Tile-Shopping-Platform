@@ -89,20 +89,45 @@ const Wishlist = () => {
 
       <div className="wishlist-grid">
         {wishlist.map(w => (
+          // <div className="wishlist-card" key={w.wishlistId}>
+          //   <img src={w.product.imageUrl} />
+
+          //   <h4>{w.product.productName}</h4>
+          //   <p>₹{w.product.pricePerBox}</p>
+
+          //   <button onClick={() => moveToCart(w.product.productId)}>
+          //     Move to Cart
+          //   </button>
+
+          //   <button onClick={() => remove(w.product.productId)}>
+          //     Remove
+          //   </button>
+          // </div>
           <div className="wishlist-card" key={w.wishlistId}>
-            <img src={w.product.imageUrl} />
+  <img src={w.product.imageUrl} alt="" />
 
-            <h4>{w.product.productName}</h4>
-            <p>₹{w.product.pricePerBox}</p>
+  <div className="wishlist-info">
+    <h4>{w.product.productName}</h4>
+    <div className="price">₹{w.product.pricePerBox}</div>
 
-            <button onClick={() => moveToCart(w.product.productId)}>
-              Move to Cart
-            </button>
+    <div className="wishlist-actions">
+      <button
+        className="move-btn"
+        onClick={() => moveToCart(w.product.productId)}
+      >
+        Move to Cart
+      </button>
 
-            <button onClick={() => remove(w.product.productId)}>
-              Remove
-            </button>
-          </div>
+      <button
+        className="remove-btn"
+        onClick={() => remove(w.product.productId)}
+      >
+        Remove
+      </button>
+    </div>
+  </div>
+</div>
+
         ))}
       </div>
     </div>

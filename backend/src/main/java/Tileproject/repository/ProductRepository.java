@@ -30,4 +30,25 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     WHERE p.isActive = 1
     """)
     List<ProductStockDTO> findActiveProductsWithStock();
+
+
+    @Query("""
+SELECT new Tileproject.dto.ProductStockDTO(
+p.productId,
+p.productName,
+p.imageUrl,
+p.pricePerBox,
+p.size,
+p.material,
+c.categoryName,
+i.stockQuantity
+)
+FROM Product p
+JOIN p.category c
+JOIN Inventory i ON i.product = p
+WHERE c.categoryId = :categoryId
+AND p.isActive = 1
+""")
+List<ProductStockDTO> findProductsByCategory(Integer categoryId);
+
 }

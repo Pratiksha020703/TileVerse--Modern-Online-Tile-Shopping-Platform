@@ -219,7 +219,9 @@ function Gallery() {
         const uniqueCategories = [
           ...new Set(
             data
-              .map((p) => p.category?.categoryName)
+              // .map((p) => p.category?.categoryName)
+              .map((p) => p.categoryName).filter(Boolean)
+
               .filter(Boolean)
           ),
         ];
@@ -255,7 +257,8 @@ function Gallery() {
     selectedCategory === "All"
       ? products
       : products.filter(
-          (p) => p.category?.categoryName === selectedCategory
+          //(p) => p.category?.categoryName === selectedCategory
+          (p) => p.categoryName === selectedCategory
         );
 
   if (loading) {
@@ -305,7 +308,9 @@ function Gallery() {
 
                 <p>
                   {tile.material} • {tile.size} •{" "}
-                  {tile.category?.categoryName}
+                  {/* {tile.category?.categoryName} */}
+                  {tile.categoryName}
+
                 </p>
 
                 <strong>₹ {tile.pricePerBox} / box</strong>

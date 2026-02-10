@@ -36,6 +36,9 @@ export const removeFromCart = (itemId) =>
   api.delete(`/api/cart/remove/item/${itemId}`);
 
 
+export const updateCartQuantity = (itemId, quantity) =>
+  api.put(`/api/cart/update/${itemId}/${quantity}`);
+
 
 /* ================= ORDERS (LOGIN REQUIRED) ================= */
 export const placeOrder = () =>
