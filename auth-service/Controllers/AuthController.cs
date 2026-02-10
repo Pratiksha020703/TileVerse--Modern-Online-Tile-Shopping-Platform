@@ -24,17 +24,14 @@ namespace AuthService.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register(RegisterRequest request)
         {
             if (await _context.Users.AnyAsync(u => u.Email == request.Email))
                 return BadRequest("Email already exists");
 
-            string role = "CUSTOMER";
-
-            if (request.Email.ToLower() == "admin@gmail.com")
-            {
-                role = "ADMIN";
-            }
+            string role = request.Email.ToLower() == "admin@gmail.com"
+                ? "ADMIN"
+                : "CUSTOMER";
 
             var user = new User
             {
@@ -47,14 +44,13 @@ namespace AuthService.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok("User registered successfully");
+            return Ok("Registered successfully");
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login(LoginRequest request)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == request.Email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
                 return Unauthorized("Invalid credentials");
@@ -68,6 +64,7 @@ namespace AuthService.Controllers
 
             return Ok(new { token });
         }
+
 
 
         // FORGOT PASSWORD

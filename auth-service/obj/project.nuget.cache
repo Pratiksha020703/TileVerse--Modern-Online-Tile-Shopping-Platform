@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6AP1o4CoQIM=",
+  "dgSpecHash": "TAACfTBG1uQ=",
   "success": true,
-  "projectFilePath": "D:\\Tileverse_Website\\auth-service\\AuthService.csproj",
+  "projectFilePath": "D:\\Tileverse_Project\\Cdac_Project\\Tileverse_Website\\auth-service\\AuthService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pratiksha Mahajan\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Pratiksha Mahajan\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -61,5 +61,15 @@
     "C:\\Users\\Pratiksha Mahajan\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
     "C:\\Users\\Pratiksha Mahajan\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "D:\\Tileverse_Project\\Cdac_Project\\Tileverse_Website\\auth-service\\AuthService.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Tileverse_Project\\Cdac_Project\\Tileverse_Website\\auth-service\\AuthService.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

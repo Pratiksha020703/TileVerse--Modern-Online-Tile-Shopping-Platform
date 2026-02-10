@@ -1,26 +1,25 @@
 package Tileproject.service;
-import org.springframework.stereotype.Service;
+
 import Tileproject.model.Category;
 import Tileproject.repository.CategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-	@Service
-	public class CategoryService {
+@Service
+public class CategoryService {
 
-	    private final CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-	    public CategoryService(CategoryRepository categoryRepository) {
-	        this.categoryRepository = categoryRepository;
-	    }
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
-	    public Category addCategory(Category category) {
-	        return categoryRepository.save(category);
-	    }
+    public Category save(Category category) {
+        return categoryRepository.save(category);
+    }
 
-	    public List<Category> getAllCategories() {
-	        return categoryRepository.findAll();
-	    }
-	}
-
-
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
+    }
+}

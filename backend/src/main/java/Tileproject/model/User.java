@@ -8,6 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.util.List;
+
+import jakarta.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class User {
@@ -30,6 +36,15 @@ public class User {
 	    private String country;
 
 	    private LocalDateTime createdAt;
+		@JsonIgnore
+@OneToMany(mappedBy = "user")
+private List<Order> orders;
+
+@JsonIgnore
+@OneToMany(mappedBy = "user")
+private List<Address> addresses;
+
+
 
 		public Integer getUserId() {
 			return userId;

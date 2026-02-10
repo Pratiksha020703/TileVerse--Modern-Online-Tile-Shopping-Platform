@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
 
 @Entity
 	public class ProductImage {
@@ -13,7 +15,9 @@ import jakarta.persistence.ManyToOne;
 	    private Integer imageId;
 
 	    @ManyToOne
-	    private Product product;
+@JoinColumn(name = "product_id")   // 👈 forces correct FK column
+private Product product;
+
 
 	    private String imageUrl;
 

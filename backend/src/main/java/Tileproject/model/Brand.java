@@ -8,12 +8,14 @@ import jakarta.persistence.Id;
 
 
 @Entity
-	public class Brand {
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Integer brandId;
+public class Brand {
 
-	    private String brandName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer brandId;
+
+    private String brandName;
+
 
 		public Integer getBrandId() {
 			return brandId;

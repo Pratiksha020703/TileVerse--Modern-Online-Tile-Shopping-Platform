@@ -1,30 +1,33 @@
 package Tileproject.controller;
-import org.springframework.web.bind.annotation.*;
 
 import Tileproject.model.Brand;
-import Tileproject.service.BrandService;
+import Tileproject.repository.BrandRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-	@RestController
-	@RequestMapping("/api/brands")
-	public class BrandController {
+@RestController
+@RequestMapping("/api/brands")
+@CrossOrigin(origins = "http://localhost:3000")
+public class BrandController {
 
-	    private final BrandService brandService;
+    private final BrandRepository brandRepository;
 
-	    public BrandController(BrandService brandService) {
-	        this.brandService = brandService;
-	    }
+    public BrandController(BrandRepository brandRepository) {
+        this.brandRepository = brandRepository;
+    }
 
-	    @PostMapping
-	    public Brand addBrand(@RequestBody Brand brand) {
-	        return brandService.addBrand(brand);
-	    }
+    // 🔓 PUBLIC
+    @GetMapping
+    public List<Brand> getAllBrands() {
+        return brandRepository.findAll();
+    }
 
-	    @GetMapping
-	    public List<Brand> getAllBrands() {
-	        return brandService.getAllBrands();
-	    }
-	}
-
-
+    // 🔐 ADMIN ONLY
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public Brand addBrand(@RequestBody Brand brand) {
+        return brandRepository.save(brand);
+    }
+}

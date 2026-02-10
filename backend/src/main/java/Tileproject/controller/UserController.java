@@ -1,11 +1,10 @@
 package Tileproject.controller;
 
-import org.springframework.web.bind.annotation.*;
-
 import Tileproject.model.User;
 import Tileproject.service.UserService;
 
-import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -17,15 +16,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public User register(@RequestBody User user) {
-        return userService.registerUser(user);
-    }
+    // returns logged in user (from JWT)
+    @PreAuthorize("hasAnyRole('CUSTOMER','ADMIN')")
+    @GetMapping("/me")
+    public User me() {
+        return userService.getOrCreateUserFromJWT();
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+
     }
 }
-
-

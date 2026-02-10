@@ -1,23 +1,25 @@
 package Tileproject.controller;
-import org.springframework.web.bind.annotation.*;
 
 import Tileproject.model.Inventory;
-import Tileproject.service.InventoryService;
+import Tileproject.repository.InventoryRepository;
+import org.springframework.web.bind.annotation.*;
 
-	@RestController
-	@RequestMapping("/api/inventory")
-	public class InventoryController {
+@RestController
+@RequestMapping("/api/inventory")
+@CrossOrigin(origins = "http://localhost:3000")
+public class InventoryController {
 
-	    private final InventoryService inventoryService;
+    private final InventoryRepository inventoryRepository;
 
-	    public InventoryController(InventoryService inventoryService) {
-	        this.inventoryService = inventoryService;
-	    }
+    public InventoryController(InventoryRepository inventoryRepository) {
+        this.inventoryRepository = inventoryRepository;
+    }
 
-	    @GetMapping("/product/{productId}")
-	    public Inventory getInventory(@PathVariable Integer productId) {
-	        return inventoryService.getInventoryByProduct(productId);
-	    }
-	}
-
-
+    // 🔥 Get stock of ONE product
+    @GetMapping("/product/{productId}")
+    public Inventory getStock(@PathVariable Integer productId) {
+        return inventoryRepository
+            .findByProduct_ProductId(productId)
+            .orElseThrow(() -> new RuntimeException("Inventory not found"));
+    }
+}

@@ -1,5 +1,7 @@
 package Tileproject.model;
+import Tileproject.model.Cart;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,17 +11,18 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cartItemId;
 
+    private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "cart_id")
+    @JsonBackReference
     private Cart cart;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-    private Integer quantity;
-
-    // ===== GETTERS & SETTERS =====
+    
+    /* getters & setters */
 
     public Integer getCartItemId() {
         return cartItemId;
@@ -45,12 +48,11 @@ public class CartItem {
         this.product = product;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }
-
