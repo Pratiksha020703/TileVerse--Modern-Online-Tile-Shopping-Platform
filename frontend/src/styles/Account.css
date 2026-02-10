@@ -1,0 +1,36 @@
+.profile-hero {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.55)
+    ),
+    url("../images/Background-Image.jpeg") center/cover no-repeat;
+    min-height: 40vh;
+}
+
+.avatar-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #ff6f61;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.text-coral {
+    color: #ff6f61;
+}
+
+.btn-coral-outline {
+    border: 2px solid #ff6f61;
+    color: #ff6f61;
+}
+
+.btn-coral-outline:hover {
+    background-color: #ff6f61;
+    color: #fff;
+}

@@ -1,0 +1,92 @@
+/* PAGE */
+.inventory-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+}
+
+.inventory-page h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 1.5rem;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--grad-start),
+    var(--grad-end)
+  );
+}
+
+/* SUCCESS MESSAGE */
+.success-msg {
+  margin-bottom: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  background: #e6fffa;
+  color: #047857;
+  font-weight: 600;
+}
+
+/* TABLE CARD */
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+/* HEADER */
+.inventory-table thead {
+  background: linear-gradient(
+    135deg,
+    var(--grad-start),
+    var(--grad-end)
+  );
+  color: #fff;
+}
+
+.inventory-table th,
+.inventory-table td {
+  padding: 1rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ROW HOVER */
+.inventory-table tbody tr:hover {
+  background: #fafafa;
+}
+
+/* INPUT */
+.inventory-table input {
+  padding: 0.45rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  width: 80px;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .inventory-page {
+    padding: 2rem 1.2rem;
+  }
+
+  .inventory-table th,
+  .inventory-table td {
+    padding: 0.7rem;
+  }
+}

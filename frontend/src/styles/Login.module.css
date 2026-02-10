@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+.loginWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  background: url("../images/Background-Image.jpeg") center/cover no-repeat;
+}
+
+/* CONTAINER */
+.container {
+  background: #fff;
+  border-radius: 10px;
+  width: 768px;
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* FORMS */
+.formContainer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s ease-in-out;
+}
+
+form {
+  background: #fff;
+  padding: 0 50px;
+  text-align: center;
+  width: 100%;
+}
+
+input {
+  background: #eee;
+  border: none;
+  padding: 12px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+button {
+  margin-top: 10px;
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background: #ff4b2b;
+  color: #fff;
+  padding: 12px 45px;
+  cursor: pointer;
+}
+
+/* SIGN IN / SIGN UP */
+.signInContainer {
+  left: 0;
+  z-index: 2;
+}
+
+.signUpContainer {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* ACTIVE STATE */
+.rightPanelActive .signInContainer {
+  transform: translateX(100%);
+}
+
+.rightPanelActive .signUpContainer {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+}
+
+/* OVERLAY */
+.overlayContainer {
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.overlay {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.rightPanelActive .overlay {
+  transform: translateX(50%);
+}
+
+.overlayPanel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.overlayLeft {
+  left: 0;
+}
+
+.overlayRight {
+  right: 0;
+}
+
+.ghost {
+  background: #fff;
+  color: #000;
+  border: none;
+}

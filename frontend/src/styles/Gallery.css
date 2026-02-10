@@ -1,0 +1,156 @@
+/* Hero Section */
+.tile-hero {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ),
+    url("../images/Background-Image.jpeg") center/cover no-repeat;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.tile-hero h1 {
+  font-size: 42px;
+  font-weight: bold;
+}
+
+.text-coral {
+  color: #ff6f61;
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.filters select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid #ff6f61;
+  color: #ff6f61;
+  font-weight: 500;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Grid */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.tile-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tile-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+.tile-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Card Content */
+.tile-info {
+  padding: 16px;
+}
+
+.tile-info h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.tile-info p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Button */
+.btn-coral-outline {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid #ff6f61;
+  background: transparent;
+  color: #ff6f61;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-coral-outline:hover {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+/* Empty State */
+.empty {
+  text-align: center;
+  margin-top: 40px;
+  color: #888;
+
+
+  /* ================================= */
+/* 
+  .gallery-filter {
+  text-align: right;
+  margin: 20px;
+}
+
+.gallery-filter select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.gallery-card {
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+} */
+
+}

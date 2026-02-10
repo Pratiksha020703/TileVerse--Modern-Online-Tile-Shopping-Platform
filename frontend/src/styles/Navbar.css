@@ -1,0 +1,48 @@
+:root {
+    --tileverse-coral: #F75A5A;
+    --tileverse-text: #333;
+    --tileverse-light: #f8f9fa;
+}
+
+.navbar {
+    background-color: var(--tileverse-light);
+    padding: 0.75rem 1rem;
+}
+
+.navbar-brand img {
+    max-width: 220px;
+    height: auto;
+}
+
+.navbar-nav .nav-link {
+    color: var(--tileverse-text);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: 600;
+}
+
+.navbar-search {
+    width: 100%;
+    margin: 0.75rem 0;
+}
+
+.btn-coral {
+    background-color: var(--tileverse-coral);
+    color: #fff;
+    border: 1px solid var(--tileverse-coral);
+}
+
+.btn-coral:hover {
+    background-color: #e64e4e;
+    border-color: #e64e4e;
+}
+
+@media (min-width: 992px) {
+    .navbar-search {
+        max-width: 400px;
+        margin: 0 2rem;
+    }
+}

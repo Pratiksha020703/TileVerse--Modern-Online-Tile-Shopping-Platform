@@ -1,0 +1,119 @@
+/* ===============================
+   Brand Variables
+================================ */
+:root {
+    --tileverse-coral: #F75A5A;
+    --tileverse-text: #333;
+    --tileverse-light: #f8f9fa;
+}
+
+/* ===============================
+   Text Helpers
+================================ */
+.text-coral {
+    color: var(--tileverse-coral) !important;
+}
+
+/* ===============================
+   Buttons
+================================ */
+.btn-coral {
+    background-color: var(--tileverse-coral);
+    color: #fff;
+    border: 1px solid var(--tileverse-coral);
+}
+
+.btn-coral:hover {
+    background-color: #e64e4e;
+    border-color: #e64e4e;
+    color: #fff;
+}
+
+/* Hero Buttons */
+/* .btn-coral-outline {
+    background-color: transparent;
+    color: #fff;
+    width: 50px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+}
+
+.btn-coral-outlines:hover {
+    background-color: var(--tileverse-coral);
+    border-color: var(--tileverse-coral);
+    color: #fff;
+} */
+
+/* ===============================
+   Hero White Button
+================================ */
+.btn-hero-white {
+    /* background-color: #fff; */
+    color: var(--tileverse-light);
+    /* border: 1px solid #fff; */
+    font-weight: 600;
+    padding: 10px 30px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-hero-white:hover {
+    background-color: var(--tileverse-coral);
+    color: #fff;
+    border-color: var(--tileverse-coral);
+}
+
+.btn-light-outline {
+    background-color: #fff;
+    color: var(--tileverse-coral);
+    border: 2px solid #fff;
+}
+
+.btn-light-outline:hover {
+    background-color: var(--tileverse-coral);
+    color: #fff;
+    border-color: var(--tileverse-coral);
+}
+
+/* ===============================
+   Hero Section
+================================ */
+.hero-section {
+    background: url("../images/Background-Image.jpeg") center / cover no-repeat;
+    /* background-color: aqua; */
+    height: 60vh;
+    position: relative;
+}
+
+/* Overlay */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Hero Content */
+.hero-section > .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===============================
+   Products Section (Cards)
+================================ */
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* ===============================
+   CTA Section
+================================ */
+.cta-section {
+    background-color: var(--tileverse-coral);
+}
