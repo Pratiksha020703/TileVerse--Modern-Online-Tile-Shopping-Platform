@@ -43,6 +43,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
             // ✅ CORS preflight (THIS WAS MISSING)
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .requestMatchers()
 
             // AUTH
             .requestMatchers("/api/auth/**").permitAll()

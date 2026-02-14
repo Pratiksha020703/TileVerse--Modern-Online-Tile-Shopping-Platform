@@ -462,8 +462,8 @@ D:\Tileverse_Project\Cdac_Project\Tileverse_Website\auth-service\obj\Debug\net8.
 D:\Tileverse_Project\Cdac_Project\Tileverse_Website\auth-service\obj\Debug\net8.0\AuthService.pdb
 D:\Tileverse_Project\Cdac_Project\Tileverse_Website\auth-service\obj\Debug\net8.0\AuthService.genruntimeconfig.cache
 D:\Tileverse_Project\Cdac_Project\Tileverse_Website\auth-service\obj\Debug\net8.0\ref\AuthService.dll
-D:\Tileverse_Project_Docker\Cdac_Project\Tileverse_Website\auth-service\bin\Debug\net8.0\AuthService.staticwebassets.endpoints.json
 D:\Tileverse_Project_Docker\Cdac_Project\Tileverse_Website\auth-service\bin\Debug\net8.0\appsettings.json
+D:\Tileverse_Project_Docker\Cdac_Project\Tileverse_Website\auth-service\bin\Debug\net8.0\AuthService.staticwebassets.endpoints.json
 D:\Tileverse_Project_Docker\Cdac_Project\Tileverse_Website\auth-service\bin\Debug\net8.0\AuthService.exe
 D:\Tileverse_Project_Docker\Cdac_Project\Tileverse_Website\auth-service\bin\Debug\net8.0\AuthService.deps.json
 D:\Tileverse_Project_Docker\Cdac_Project\Tileverse_Website\auth-service\bin\Debug\net8.0\AuthService.runtimeconfig.json

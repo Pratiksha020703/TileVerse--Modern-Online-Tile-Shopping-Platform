@@ -75,7 +75,7 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 // ===== Services =====
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<EmailService>();
-    
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

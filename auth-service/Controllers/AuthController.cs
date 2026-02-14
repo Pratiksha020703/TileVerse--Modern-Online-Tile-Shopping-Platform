@@ -28,6 +28,7 @@ namespace AuthService.Controllers
             _emailService = emailService;
         }
 
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
