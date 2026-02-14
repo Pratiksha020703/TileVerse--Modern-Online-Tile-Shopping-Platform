@@ -1,24 +1,24 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { resetPassword } from "../api/authApi";
+
 
 const ResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
 
-  const handleReset = async () => {
-    try {
-      await axios.post(
-        `http://localhost:5000/api/auth/reset-password/${token}`,
-        { password }
-      );
-      alert("Password reset successful ✅");
-      navigate("/auth");
-    } catch (err) {
-      alert(err.response?.data || "Invalid or expired token ❌");
-    }
-  };
+  
+const handleReset = async () => {
+  try {
+    await resetPassword(token, password);
+    alert("Password reset successful ✅");
+    navigate("/auth");
+  } catch (err) {
+    alert(err.response?.data || "Invalid or expired token ❌");
+  }
+};
 
   return (
     <div className="auth-container">

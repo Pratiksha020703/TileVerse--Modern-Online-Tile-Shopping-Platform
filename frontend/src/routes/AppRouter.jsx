@@ -1,35 +1,4 @@
-// import { Routes, Route } from "react-router-dom";
-// import App from "../layouts/App";
-// import AuthLogin from "../layouts/AuthLogin";
 
-// import Home from "../pages/Home";
-// import Products from "../pages/Products";
-// import Gallery from "../pages/Gallery";
-// import Account from "../pages/Account";
-// import Login from "../components/Login";
-// import Contact from "../pages/ContactUs";
-// import LoginExtra from "../components/LoginExtra";
-
-// const AppRoutes = () => {
-//     return (
-//         <Routes>
-//             {/* Layout Route */}
-//             <Route element={<App />}>
-//                 <Route path="/" element={<Home />} />
-//                 <Route path="/products" element={<Products />} />
-//                 <Route path="/gallery" element={<Gallery />} />
-//                 <Route path="/account" element={<Account />} />
-//                 <Route path="/contactus" element={<Contact />} />
-//             </Route>
-//             <Route element={<AuthLogin />}>
-//                 <Route path="/signin" element={<LoginExtra />} />
-//                 <Route path="/signup" element={<Login />} />
-//             </Route>
-//         </Routes>
-//     );
-// };
-
-// export default AppRoutes;
 
 import { Routes, Route } from "react-router-dom";
 import App from "../layouts/App";

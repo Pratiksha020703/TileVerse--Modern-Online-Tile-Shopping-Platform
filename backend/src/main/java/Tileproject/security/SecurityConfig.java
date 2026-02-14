@@ -48,6 +48,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .requestMatchers("/api/auth/**").permitAll()
 
             // PUBLIC READ
+            
             .requestMatchers(HttpMethod.GET,
                 "/api/products/**",
                 "/api/categories/**",
@@ -80,11 +81,14 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             //.requestMatchers("/api/payment/**").hasAnyRole("CUSTOMER","ADMIN")
             
             // PAYMENT
-.requestMatchers(HttpMethod.POST, "/api/payment/create").hasAnyRole("CUSTOMER","ADMIN")
-.requestMatchers(HttpMethod.POST, "/api/payment/verify").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/payment/create").hasAnyRole("CUSTOMER","ADMIN")
+            .requestMatchers(HttpMethod.POST, "/api/payment/verify").permitAll()
 
-.requestMatchers("/api/orders/**").hasAnyRole("CUSTOMER", "ADMIN")
-.requestMatchers("/api/admin/**").hasRole("ADMIN")
+            .requestMatchers("/api/orders/**").hasAnyRole("CUSTOMER", "ADMIN")
+            .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
+            .requestMatchers(HttpMethod.POST, "/api/contact").hasAnyRole("CUSTOMER","ADMIN")
+
 
 
 

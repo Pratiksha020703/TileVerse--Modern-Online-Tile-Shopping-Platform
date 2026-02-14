@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using AuthService.Data;
 using AuthService.DTOs;
@@ -7,6 +8,8 @@ using AuthService.Services;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+
 
 namespace AuthService.Controllers
 {
@@ -16,11 +19,13 @@ namespace AuthService.Controllers
     {
         private readonly AuthDbContext _context;
         private readonly JwtService _jwtService;
+        private readonly EmailService _emailService;
 
-        public AuthController(AuthDbContext context, JwtService jwtService)
+        public AuthController(AuthDbContext context, JwtService jwtService, EmailService emailService)
         {
             _context = context;
             _jwtService = jwtService;
+            _emailService = emailService;
         }
 
         [HttpPost("register")]
@@ -65,9 +70,6 @@ namespace AuthService.Controllers
             return Ok(new { token });
         }
 
-
-
-        // FORGOT PASSWORD
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
         {
@@ -76,16 +78,26 @@ namespace AuthService.Controllers
             if (user == null)
                 return Ok("If email exists, reset link will be sent");
 
-            user.ResetToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+            var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+
+            user.ResetToken = token;
             user.ResetTokenExpiry = DateTime.UtcNow.AddMinutes(15);
 
             await _context.SaveChangesAsync();
 
-            // TEMP: return token for testing
-            return Ok(new { resetToken = user.ResetToken });
+           var encodedToken = WebUtility.UrlEncode(token);
+
+            var resetLink = $"http://localhost:3000/reset-password/{encodedToken}";
+
+            await _emailService.SendEmailAsync(
+                user.Email,
+                "TileVerse Password Reset",
+                $"Click to reset password: {resetLink}"
+            );
+
+            return Ok("Reset link sent");
         }
 
-        // RESET PASSWORD
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
@@ -94,7 +106,6 @@ namespace AuthService.Controllers
                 u.ResetTokenExpiry.HasValue &&
                 u.ResetTokenExpiry.Value > DateTime.UtcNow
             );
-
 
             if (user == null)
                 return BadRequest("Invalid or expired token");
@@ -107,5 +118,9 @@ namespace AuthService.Controllers
 
             return Ok("Password reset successful");
         }
+
+
     }
 }
+
+

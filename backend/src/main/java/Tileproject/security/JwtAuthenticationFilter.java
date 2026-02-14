@@ -20,10 +20,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
 
+
+    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
+    this.jwtUtil = jwtUtil;
+}
 @Override
 protected void doFilterInternal(
         HttpServletRequest request,
@@ -49,19 +50,35 @@ protected void doFilterInternal(
                 throw new RuntimeException("Invalid JWT");
             }
 
+            // UsernamePasswordAuthenticationToken auth =
+            //     new UsernamePasswordAuthenticationToken(
+            //         email,
+            //         null,
+            //         List.of(new SimpleGrantedAuthority("ROLE_" + role))
+            //     );
+
+            String formattedRole = role.toUpperCase().startsWith("ROLE_")
+                    ? role.toUpperCase()
+                    : "ROLE_" + role.toUpperCase();
+
             UsernamePasswordAuthenticationToken auth =
                 new UsernamePasswordAuthenticationToken(
                     email,
                     null,
-                    List.of(new SimpleGrantedAuthority("ROLE_" + role))
+                    List.of(new SimpleGrantedAuthority(formattedRole))
                 );
 
+
             SecurityContextHolder.getContext().setAuthentication(auth);
+            System.out.println("AUTHORITIES = " +
+    SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
+
 
         } catch (Exception e) {
             SecurityContextHolder.clearContext();
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
+            // response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            // return;
         }
         System.out.println("🔥 JWT filter hit");
 System.out.println("AUTH HEADER = " + header);

@@ -1,0 +1,190 @@
+# version: "3.9"
+
+# services:
+
+#   mysql-backend:
+#     image: mysql:8
+#     container_name: mysql-backend
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: tile_backend
+#     ports:
+#       - "3307:3306"
+#     volumes:
+#       - backend_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#       interval: 5s
+#       retries: 10
+
+#   mysql-auth:
+#     image: mysql:8
+#     container_name: mysql-auth
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: tile_auth
+#     ports:
+#       - "3308:3306"
+#     volumes:
+#       - auth_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#       interval: 5s
+#       retries: 10
+
+#   backend:
+#     build:
+#       context: ./backend
+#     container_name: backend
+#     ports:
+#       - "8080:8080"
+#     depends_on:
+#       mysql-backend:
+#         condition: service_healthy
+#     environment:
+#       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-backend:3306/tile_backend
+#       SPRING_DATASOURCE_USERNAME: root
+#       SPRING_DATASOURCE_PASSWORD: root
+#       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+#       JWT_SECRET: W+vBQ0PZbx8LefrBM6rGP9rJBJoTxfLB4/iSiHIF8PM5ly9gi7nBgKoteAP+LuebSo78uNv0MIi6T97jXDsH6g==
+#       JWT_ISSUER: TileVerse.Auth
+#       JWT_AUDIENCE: TileVerse.Client
+#       RAZORPAY_KEY_ID: rzp_test_S9DdPQDeGB5GVd
+#       RAZORPAY_KEY_SECRET: M7qpyXCIVV7Y4WbGsG30yQG9
+
+#   auth-service:
+#     build:
+#       context: ./auth-service
+#     container_name: auth-service
+#     ports:
+#       - "5000:5000"
+#     depends_on:
+#       mysql-auth:
+#         condition: service_healthy
+#     environment:
+#       AUTH_DB_HOST: mysql-auth
+#       AUTH_DB_NAME: tile_auth
+#       AUTH_DB_USER: root
+#       AUTH_DB_PASSWORD: root
+#       JWT_SECRET: W+vBQ0PZbx8LefrBM6rGP9rJBJoTxfLB4/iSiHIF8PM5ly9gi7nBgKoteAP+LuebSo78uNv0MIi6T97jXDsH6g==
+#       JWT_ISSUER: TileVerse.Auth
+#       JWT_AUDIENCE: TileVerse.Client
+
+#   frontend:
+#     build:
+#       context: ./frontend
+#     container_name: frontend
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       REACT_APP_BACKEND_URL: http://localhost:8080
+#       REACT_APP_AUTH_URL: http://localhost:5000
+
+# volumes:
+#   backend_data:
+#   auth_data:
+
+
+  version: "3.9"
+
+  services:
+
+    mysql-backend:
+      image: mysql:8
+      container_name: mysql-backend
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: tile_backend
+      ports:
+        - "3308:3306"
+      volumes:
+        - mysql_backend_data:/var/lib/mysql
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+
+
+
+    mysql-auth:
+      image: mysql:8
+      container_name: mysql-auth
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: tile_auth
+      ports:
+        - "3307:3306"
+      volumes:
+        - mysql_auth_data:/var/lib/mysql
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+
+
+
+    backend:
+      build:
+        context: ./backend
+      container_name: backend
+      ports:
+        - "8080:8080"
+      env_file:
+        - .env
+      environment:
+        SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+        SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+        SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+        JWT_SECRET: ${JWT_SECRET}
+        JWT_ISSUER: ${JWT_ISSUER}
+        JWT_AUDIENCE: ${JWT_AUDIENCE}
+        SPRING_MAIL_HOST: ${SPRING_MAIL_HOST}
+        SPRING_MAIL_PORT: ${SPRING_MAIL_PORT}
+        SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
+        SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
+
+      depends_on:
+        mysql-backend:
+          condition: service_healthy
+
+
+    auth-service:
+      build:
+        context: ./auth-service
+      container_name: auth-service
+      env_file:
+        - .env
+      environment:
+        ConnectionStrings__DefaultConnection: "Server=${AUTH_DB_HOST};Port=3306;Database=${AUTH_DB_NAME};User=${AUTH_DB_USER};Password=${AUTH_DB_PASSWORD};"
+        Jwt__Key: ${JWT_SECRET}
+        Jwt__Issuer: ${JWT_ISSUER}
+        Jwt__Audience: ${JWT_AUDIENCE}
+        EmailSettings__From: ${EMAIL_FROM}
+        EmailSettings__SmtpServer: ${SMTP_SERVER}
+        EmailSettings__Port: ${SMTP_PORT}
+        EmailSettings__Username: ${SMTP_USERNAME}
+        EmailSettings__Password: ${SMTP_PASSWORD}
+
+      ports:
+        - "5000:5000"
+      depends_on:
+        mysql-auth:
+          condition: service_healthy
+
+
+    frontend:
+      build:
+        context: ./frontend
+      container_name: frontend
+      env_file:
+        - .env
+      ports:
+        - "3000:3000"
+
+  volumes:
+    mysql_auth_data:
+    mysql_backend_data:
+

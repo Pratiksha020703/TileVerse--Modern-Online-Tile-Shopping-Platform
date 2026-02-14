@@ -97,6 +97,8 @@ import Tileproject.model.Role;
 import Tileproject.model.User;
 import Tileproject.repository.RoleRepository;
 import Tileproject.repository.UserRepository;
+import Tileproject.security.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 
 import io.jsonwebtoken.Claims;
 import org.springframework.security.core.Authentication;
@@ -110,10 +112,15 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final JwtUtil jwtUtil;
+    private final HttpServletRequest request;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+
+    public UserService(UserRepository userRepository, RoleRepository roleRepository,JwtUtil jwtUtil,HttpServletRequest request) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+         this.jwtUtil = jwtUtil;
+         this.request = request;
     }
 
     public User getOrCreateUserFromJWT() {
@@ -121,12 +128,20 @@ public class UserService {
     String email = SecurityContextHolder.getContext()
             .getAuthentication()
             .getName();
+            
+    String header = request.getHeader("Authorization");
+    String token = header.substring(7);
+
+    Claims claims = jwtUtil.validateToken(token);
+    String fullName = claims.get("fullName", String.class);
+
 
     return userRepository.findByEmail(email)
             .orElseGet(() -> {
                 User user = new User();
                 user.setEmail(email);
-                user.setFullName("User");
+                // user.setFullName("User");
+                user.setFullName(fullName);
                 user.setCreatedAt(LocalDateTime.now());
 
                 Role role = roleRepository.findByRoleName("CUSTOMER").orElseThrow();
@@ -135,6 +150,7 @@ public class UserService {
                 return userRepository.save(user);
             });
 }
+
 
 }
 

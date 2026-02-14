@@ -43,3 +43,9 @@ export const updateCartQuantity = (itemId, quantity) =>
 /* ================= ORDERS (LOGIN REQUIRED) ================= */
 export const placeOrder = () =>
   api.post("/api/orders/place");
+
+export const sendContact = (data) =>
+  api.post("/api/contact", data);
+
+
+

@@ -1,32 +1,36 @@
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { forgotPassword } from "../api/authApi";
 
-const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
 
-  const handleSubmit = async () => {
+const ResetPassword = () => {
+  const { token } = useParams();
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+
+  const handleReset = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/forgot-password", {
-        email,
-      });
-      alert("Password reset link sent to your email ✅");
+      await forgotPassword(email);
+      alert("Password reset successful ✅");
+      navigate("/auth");
     } catch (err) {
-      alert(err.response?.data || "Something went wrong ❌");
+      alert(err.response?.data || "Invalid or expired token ❌");
     }
   };
 
   return (
     <div className="auth-container">
-      <h2>Forgot Password</h2>
+      <h2>Reset Password</h2>
       <input
-        type="email"
-        placeholder="Enter registered email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        type="password"
+        placeholder="New password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleSubmit}>Send Reset Link</button>
+      <button onClick={handleReset}>Reset Password</button>
     </div>
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;
